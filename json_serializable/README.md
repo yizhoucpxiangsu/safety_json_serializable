@@ -1,4 +1,4 @@
-### safety_json_serializable
+### json_serializable
 
 Base on [package:json_serializable] and handle parsing JSON to objects without throwing exceptions.
 
@@ -11,9 +11,9 @@ Base on [package:json_serializable] and handle parsing JSON to objects without t
 
 Left: json_serializable
 
-Right: safety_json_serializable
+Right: json_serializable
 
-![](https://raw.githubusercontent.com/minhtritc97/safety_json_serializable/refs/heads/master/json_serializable/resources/diff.jpg)
+![](https://raw.githubusercontent.com/minhtritc97/json_serializable/refs/heads/master/json_serializable/resources/diff.jpg)
 
 [`BigInt`]: https://api.dart.dev/stable/dart-core/BigInt-class.html
 [`bool`]: https://api.dart.dev/stable/dart-core/bool-class.html
