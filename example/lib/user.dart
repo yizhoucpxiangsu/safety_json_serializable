@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 
 /// Demo model covering every type category that differs between
-/// `json_serializable` and `safety_json_serializable` when the generator
+/// `json_serializable` and `json_serializable` when the generator
 /// runs:
 ///
 /// - primitive scalar (`int`, `double`, `bool`, `String`)

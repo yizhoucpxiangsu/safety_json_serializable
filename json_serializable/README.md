@@ -1,6 +1,6 @@
-# safety_json_serializable
+# json_serializable
 
-[![Pub Package](https://img.shields.io/pub/v/safety_json_serializable.svg)](https://pub.dev/packages/safety_json_serializable)
+[![Pub Package](https://img.shields.io/pub/v/json_serializable.svg)](https://pub.dev/packages/json_serializable)
 
 A drop-in replacement for [`package:json_serializable`] that generates
 **null-safe, exception-free** `fromJson`/`toJson` code.
@@ -12,7 +12,7 @@ A drop-in replacement for [`package:json_serializable`] that generates
 — say `id` switches from `int` to `String` — that cast throws a
 `TypeError` at runtime and crashes the app.
 
-`safety_json_serializable` is a fork of `json_serializable` that replaces
+`json_serializable` is a fork of `json_serializable` that replaces
 those unsafe `as` casts with tolerant parsing (`toString()` + `tryParse`,
 type checks before casting, etc.), so a type mismatch from the backend
 degrades to `null` / an empty value instead of crashing the app.
@@ -31,9 +31,9 @@ degrades to `null` / an empty value instead of crashing the app.
 
 ## Example
 
-Left: `json_serializable` — Right: `safety_json_serializable`
+Left: `json_serializable` — Right: `json_serializable`
 
-![diff](https://raw.githubusercontent.com/minhtritc97/safety_json_serializable/refs/heads/master/json_serializable/resources/diff.png)
+![diff](https://raw.githubusercontent.com/minhtritc97/json_serializable/refs/heads/master/json_serializable/resources/diff.png)
 
 ## Installation
 
@@ -43,7 +43,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.0
-  safety_json_serializable: ^<latest_version>
+  json_serializable: ^<latest_version>
 ```
 
 Run the generator exactly as you would with `json_serializable`:
@@ -54,7 +54,7 @@ dart run build_runner build --delete-conflicting-outputs
 
 ## Migrating from json_serializable
 
-Migration is **zero-config**. `safety_json_serializable` is built as a
+Migration is **zero-config**. `json_serializable` is built as a
 drop-in replacement, so nothing in your existing code needs to change —
 no new annotations, no changed imports, no different `build.yaml`.
 
@@ -63,7 +63,7 @@ no new annotations, no changed imports, no different `build.yaml`.
 ```diff
  dev_dependencies:
 -  json_serializable: ^6.11.3
-+  safety_json_serializable: ^<latest_version>
++  json_serializable: ^<latest_version>
 ```
 
 **Step 2** — Get packages and regenerate:
@@ -75,7 +75,7 @@ dart run build_runner build --delete-conflicting-outputs
 
 That's it. Your models, `@JsonSerializable()` annotations, `@JsonKey()`
 customizations, `part '*.g.dart'` declarations, and `build.yaml` options
-all stay exactly as they are — `safety_json_serializable` only changes
+all stay exactly as they are — `json_serializable` only changes
 *how* the generator emits the parsing code inside `.g.dart`, not the
 public API you use to configure it.
 
@@ -85,7 +85,7 @@ public API you use to configure it.
 // json_serializable
 id: json['id'] as int?,
 
-// safety_json_serializable
+// json_serializable
 id: json['id'] == null ? null : int.tryParse(json['id'].toString()),
 ```
 
@@ -95,7 +95,7 @@ users: (json['users'] as List<dynamic>?)
     ?.map((e) => User.fromJson(e as Map<String, dynamic>))
     .toList(),
 
-// safety_json_serializable
+// json_serializable
 users: json['users'] is List
     ? (json['users'] as List<dynamic>)
         .map((e) => e == null || e is! Map
@@ -107,7 +107,7 @@ users: json['users'] is List
 
 ### Compatibility notes
 
-- `safety_json_serializable` tracks a specific upstream `json_serializable`
+- `json_serializable` tracks a specific upstream `json_serializable`
   version (see the package's `pubspec.yaml` for the exact base version).
   When upgrading, check the [CHANGELOG](CHANGELOG.md) to confirm which
   upstream version a release is rebased on.
